@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Photo_id:</strong>
+  <%= @photo.photo_id %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @photo.country %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @photo.state %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @photo.city %>
+</p>
+
+<p>
+  <strong>Landmark:</strong>
+  <%= @photo.landmark %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @photo.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @photo.longitude %>
+</p>
+
+<p>
+  <strong>Perspective:</strong>
+  <%= @photo.perspective %>
+</p>
+
+<p>
+  <strong>User_id:</strong>
+  <%= @photo.user_id %>
+</p>
+
+<p>
+  <strong>Photo_url:</strong>
+  <%= @photo.photo_url %>
+</p>
+
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>
