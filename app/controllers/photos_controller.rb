@@ -3,13 +3,19 @@ class PhotosController < ApplicationController
 
   # GET /photos or /photos.json
   def index
-    @photos = Photo.all
-
+    # @photos = Photo.all
+    data = Photo.all
     render status: :ok, json: data
   end
 
   # GET /photos/1 or /photos/1.json
   def show
+    render(
+        status: :ok,
+        json: @photo.as_json(
+            only: [:photo_id, :country, :state, :city, :landmark, :latitude, :longitude, :perspective, :user_id, :photo_url],
+        )
+    )
   end
 
   # GET /photos/new
