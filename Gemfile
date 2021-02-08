@@ -64,6 +64,8 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap'
 # gem 'sass-rails'
+gem 'rack-cors'
+
 
 group :development, :test do
   gem 'pry-rails'
