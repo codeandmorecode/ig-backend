@@ -55,10 +55,20 @@ class PhotosController < ApplicationController
     end
   end
 
-  def search
+  def searchlocation
     results = []
     Photo.all.each do |photo|
       if photo.country == params[:country] && photo.state == params[:state] && photo.city == params[:city]
+        results << photo
+      end
+    end
+    render status: :ok, json: results
+  end
+
+  def searchlandmark
+    results = []
+    Photo.all.each do |photo|
+      if photo.landmark == params[:landmark]
         results << photo
       end
     end
