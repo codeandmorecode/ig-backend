@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
 
   # GET /photos or /photos.json
   def index
@@ -27,19 +28,29 @@ class PhotosController < ApplicationController
   def edit
   end
 
+  def next_photo_id
+    #generate photo id
+  end
   # POST /photos or /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    parameters = photo_params
+    parameters[:photo_id] = parameters[:photo_id].to_i
+    parameters[:user_id] = parameters[:user_id].to_i
+    parameters[:latitude] = parameters[:latitude].to_f
+    parameters[:longitude] = parameters[:longitude].to_f
 
-    respond_to do |format|
+    @photo = Photo.new(parameters)
+
+    # respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render :show, status: :created, location: @photo }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+        # format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        # format.json { render :show, status: :created, location: @photo }
+        render json: @photo
+      # else
+      #   format.html { render :new, status: :unprocessable_entity }
+      #   format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # PATCH/PUT /photos/1 or /photos/1.json
@@ -65,15 +76,15 @@ class PhotosController < ApplicationController
     render status: :ok, json: results
   end
 
-  def searchlandmark
-    results = []
-    Photo.all.each do |photo|
-      if photo.landmark == params[:landmark]
-        results << photo
-      end
-    end
-    render status: :ok, json: results
-  end
+  # def searchlandmark
+  #   results = []
+  #   Photo.all.each do |photo|
+  #     if photo.landmark == params[:landmark]
+  #       results << photo
+  #     end
+  #   end
+  #   render status: :ok, json: results
+  # end
 
   # DELETE /photos/1 or /photos/1.json
   def destroy
