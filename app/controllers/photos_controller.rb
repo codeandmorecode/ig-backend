@@ -29,12 +29,13 @@ class PhotosController < ApplicationController
   end
 
   def next_photo_id
-    #generate photo id
+
   end
   # POST /photos or /photos.json
   def create
     parameters = photo_params
-    parameters[:photo_id] = parameters[:photo_id].to_i
+    parameters[:photo_id] = next_photo_id
+    # parameters[:photo_id] = parameters[:photo_id].to_i
     parameters[:user_id] = parameters[:user_id].to_i
     parameters[:latitude] = parameters[:latitude].to_f
     parameters[:longitude] = parameters[:longitude].to_f
